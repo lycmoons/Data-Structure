@@ -34,3 +34,52 @@ public:
         }
     }
 };
+
+// 2. 链式存储方式（使用单链表来存储）
+// 头节点的 next 指针指向的元素是栈顶元素
+class Node {
+public:
+    int data;
+    Node* next;
+
+    Node(int dt) {
+        data = dt;
+        next = nullptr;
+    }
+};
+
+class Stack {
+private:
+    Node* head = new Node(0);  // 头节点不代表数据
+
+public:
+    // 判空
+    bool empty() {
+        return head->next == nullptr;
+    }
+
+    // 入栈
+    void push(int num) {
+        Node* node = new Node(num);
+        node->next = head->next;
+        head->next = node;
+    }
+
+    // 出栈
+    bool pop() {
+        if(empty()) return false;
+        Node* temp = head->next;
+        head->next = temp->next;
+        delete temp;
+    }
+
+    // 释放空间
+    ~Stack() {
+        Node* temp;
+        while(head != nullptr) {
+            temp = head;
+            head = head->next;
+            delete temp;
+        }
+    }
+};
