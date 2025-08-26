@@ -48,3 +48,38 @@ if(pre != nullptr && pre->right == nullptr) {
     pre->right = node;
     pre->rtag = false;
 }
+
+
+// 使用线索化的二叉树寻找指定节点的前驱和后继
+// 以中序遍历为例
+Node* nextNode(Node* cur) {
+    if(!cur->rtag) return cur->right;
+    while(cur->ltag) {
+        cur = cur->left;
+    }
+    return cur;
+}
+
+Node* preNode(Node* cur) {
+    if(!cur->ltag) return cur->left;
+    while(cur->rtag) {
+        cur = cur->right;
+    }
+    return cur;
+}
+
+
+
+/**
+ * 掌握了上面的获取后继的方法后
+ * 遍历线索化的二叉树就不需要使用递归的方法来实现了
+ */
+void inOrder(Node* root) {
+    Node* firstNode = root;
+    while(firstNode->ltag) {
+        firstNode = firstNode->left;
+    }
+    for(Node* i = firstNode; i != nullptr; i = nextNode(i)) {
+        // 访问节点 i
+    }
+}
