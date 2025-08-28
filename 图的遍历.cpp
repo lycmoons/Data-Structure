@@ -1,12 +1,13 @@
 #include<vector>
 #include<queue>
 #include<unordered_set>
+using namespace std;
 #define SIZE 20
 /**
  * 在实现图的遍历算法时，统一使用邻接表存储方式来作示范
  * 使用 visit 函数意思为访问顶点
  * 下面是一个简化版的邻接表存储形式
- * 其中 g(i) 是一个 vector 容器，存储的是 i 号顶点能够到达的所有顶点的编号
+ * 其中 g[i] 是一个 vector 容器，存储的是 i 号顶点能够到达的所有顶点的编号
  */
 vector<vector<int>> g(SIZE);
 
@@ -53,3 +54,10 @@ void dfs(vector<vector<int>>& g, int start) {
         }
     }
 }
+
+/**
+ * 上面的遍历函数适用于连通无向图和强连通有向图
+ * 当一个图有多个连通分量或强连通分量时
+ * 需要对不同的连通分量或强连通分量分别进行 BFS 或 DFS
+ * 同时可以得到对应的 BFS 生成森林和 DFS 生成森林
+ */

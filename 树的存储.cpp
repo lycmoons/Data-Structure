@@ -1,4 +1,5 @@
 #include<vector>
+using namespace std;
 /**
  * 双亲表示法（顺序存储）
  * 
