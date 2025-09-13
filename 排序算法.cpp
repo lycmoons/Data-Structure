@@ -177,6 +177,55 @@ void heapSort(vector<int>& nums) {
 
 
 // 归并排序
+/**
+ * 使用分组合并的思路
+ * 先将大小为 n 的数组分为 n 组，每个元素为单独的一组
+ * 组与组之间两两进行合并（二路归并）
+ * 每一个独立的组都是有序的
+ * 得到更少的组，并继续进行二路归并，直到归并到只剩一个组
+ */
+void mergeSort(vector<int>& nums, int left, int right) {
+    if(left < right) {
+        // 先进行分组（一直细分到每个组只有一个元素 left == right）
+        int mid = (left + right) / 2;
+        mergeSort(nums, left, mid);
+        mergeSort(nums, mid + 1, right);
+
+        // 进行归并操作（left 到 mid 为一组，mid + 1 到 right 为一组）
+        vector<int> temp(right - left + 1);
+        int a = left;
+        int b = mid + 1;
+        int i = 0;
+        while(a <= mid && b <= right) {
+            if(nums[a] <= nums[b]) {
+                temp[i] = nums[a];
+                a++;
+            }
+            else {
+                temp[i] = nums[b];
+                b++;
+            }
+            i++;
+        }
+        if(a > mid) {
+            for(; i < temp.size(); i++) {
+                temp[i] = nums[b];
+                b++;
+            }
+        }
+        else {
+            for(; i < temp.size(); i++) {
+                temp[i] = nums[a];
+                a++;
+            }
+        }
+        
+        for(int i = 0; i < temp.size(); i++) {
+            nums[i + left] = temp[i];
+        }
+    }
+}
+
 
 // 基数排序
 
