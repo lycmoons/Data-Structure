@@ -122,8 +122,8 @@ void floyd(vector<vector<pair<int, int>>>& g, vector<vector<int>>& dist, vector<
     for(int i = 0; i < n; i++) {
         for(int j = 0; j < n; j++) {
             for(int k = 0; k < n; k++) {
-                if(j == i && k == i && j == k) continue;  // 跳过不需要更新的路径
-                if(dist[j][i] == INT_MAX && dist[i][k] == INT_MAX) continue;  // 跳过无法以 i 号顶点为中间点的路径
+                if(j == i || k == i || j == k) continue;  // 跳过不需要更新的路径
+                if(dist[j][i] == INT_MAX || dist[i][k] == INT_MAX) continue;  // 跳过无法以 i 号顶点为中间点的路径
                 int newLength = dist[j][i] + dist[i][k];
                 if(newLength < dist[j][k]) {
                     dist[j][k] = newLength;
